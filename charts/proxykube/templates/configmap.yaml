@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "proxykube.fullname" . }}
+  labels:
+    {{- include "proxykube.labels" . | nindent 4 }}
+data:
+  config.yaml: |
+    proxy:
+      listenAddress: {{ .Values.proxy.listenAddress | quote }}
+      adminAddress: {{ .Values.proxy.adminAddress | quote }}
+      dialTimeout: {{ .Values.proxy.dialTimeout | quote }}
+      idleTimeout: {{ .Values.proxy.idleTimeout | quote }}
+      allow:
+        {{- toYaml .Values.proxy.allow | nindent 8 }}
+    otel:
+      enabled: {{ .Values.otel.enabled }}
+      endpoint: {{ .Values.otel.endpoint | quote }}
+      insecure: {{ .Values.otel.insecure }}
+      headers:
+        {{- toYaml .Values.otel.headers | nindent 8 }}
+      timeout: {{ .Values.otel.timeout | quote }}
+      serviceName: {{ .Values.otel.serviceName | quote }}
+    prometheus:
+      enabled: {{ .Values.prometheus.enabled }}
+    logging:
+      level: {{ .Values.logging.level | quote }}
+      format: {{ .Values.logging.format | quote }}

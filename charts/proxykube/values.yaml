@@ -1,0 +1,93 @@
+replicaCount: 2
+
+image:
+  repository: ghcr.io/thomasilliet/proxykube
+  tag: ""
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+proxy:
+  listenAddress: ":3128"
+  adminAddress: ":9090"
+  dialTimeout: 10s
+  idleTimeout: 90s
+  allow: []
+
+otel:
+  enabled: false
+  endpoint: otel-collector.observability.svc:4317
+  insecure: false
+  headers: {}
+  timeout: 5s
+  serviceName: proxykube
+
+prometheus:
+  enabled: false
+  scrapeAnnotations: false
+  serviceMonitor:
+    enabled: false
+    interval: 30s
+    labels: {}
+
+logging:
+  level: info
+  format: json
+
+service:
+  type: ClusterIP
+  proxyPort: 3128
+  adminPort: 9090
+
+serviceAccount:
+  create: true
+  name: ""
+  annotations: {}
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext:
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop: ["ALL"]
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    memory: 128Mi
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          topologyKey: kubernetes.io/hostname
+          labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values: [proxykube]
+
+networkPolicy:
+  enabled: true
+  proxyIngress: []
+  metricsIngress: []
+
+nodeSelector: {}
+tolerations: []
+terminationGracePeriodSeconds: 30

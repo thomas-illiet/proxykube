@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">ProxyKube architecture</title>
+  <desc id="desc">Traffic flows from Kubernetes workloads through a ClusterIP service and two proxy pods to allowed upstream domains. Telemetry flows to Prometheus and an OpenTelemetry Collector.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#475569"/></marker>
+    <style>.box{fill:#f8fafc;stroke:#334155;stroke-width:2}.accent{fill:#e0f2fe;stroke:#0284c7;stroke-width:2}.obs{fill:#ecfdf5;stroke:#059669;stroke-width:2}.deny{fill:#fef2f2;stroke:#dc2626;stroke-width:2}.label{font:600 20px sans-serif;fill:#0f172a}.small{font:16px sans-serif;fill:#334155}.line{stroke:#475569;stroke-width:3;fill:none;marker-end:url(#arrow)}.dash{stroke-dasharray:8 6}</style>
+  </defs>
+  <rect width="1200" height="620" fill="#fff"/>
+  <text x="48" y="52" class="label" font-size="28">ProxyKube — architecture Kubernetes</text>
+  <rect x="50" y="210" width="200" height="110" rx="14" class="box"/><text x="150" y="250" text-anchor="middle" class="label">Workloads</text><text x="150" y="280" text-anchor="middle" class="small">HTTP_PROXY / HTTPS_PROXY</text>
+  <rect x="330" y="210" width="190" height="110" rx="14" class="accent"/><text x="425" y="250" text-anchor="middle" class="label">Service</text><text x="425" y="280" text-anchor="middle" class="small">ClusterIP :3128</text>
+  <rect x="600" y="130" width="220" height="110" rx="14" class="accent"/><text x="710" y="170" text-anchor="middle" class="label">Proxy pod A</text><text x="710" y="200" text-anchor="middle" class="small">Allowlist + CONNECT</text>
+  <rect x="600" y="290" width="220" height="110" rx="14" class="accent"/><text x="710" y="330" text-anchor="middle" class="label">Proxy pod B</text><text x="710" y="360" text-anchor="middle" class="small">Allowlist + CONNECT</text>
+  <rect x="930" y="210" width="220" height="110" rx="14" class="box"/><text x="1040" y="250" text-anchor="middle" class="label">Upstreams autorisés</text><text x="1040" y="280" text-anchor="middle" class="small">HTTP ou TLS opaque</text>
+  <rect x="590" y="490" width="230" height="85" rx="14" class="obs"/><text x="705" y="525" text-anchor="middle" class="label">OTel Collector</text><text x="705" y="552" text-anchor="middle" class="small">OTLP optionnel</text>
+  <rect x="920" y="490" width="230" height="85" rx="14" class="obs"/><text x="1035" y="525" text-anchor="middle" class="label">Prometheus</text><text x="1035" y="552" text-anchor="middle" class="small">/metrics optionnel</text>
+  <path d="M250 265 H330" class="line"/><path d="M520 265 C560 265 560 185 600 185" class="line"/><path d="M520 265 C560 265 560 345 600 345" class="line"/><path d="M820 185 C870 185 880 265 930 265" class="line"/><path d="M820 345 C870 345 880 265 930 265" class="line"/>
+  <path d="M690 400 V490" class="line dash"/><path d="M760 400 C820 445 900 440 980 490" class="line dash"/>
+</svg>

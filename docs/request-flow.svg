@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="760" viewBox="0 0 1000 760" role="img" aria-labelledby="title desc">
+  <title id="title">Proxy request decision flow</title>
+  <desc id="desc">The proxy parses the destination, normalizes the host, checks domain and port rules, denies unmatched requests, and forwards HTTP or creates an opaque CONNECT tunnel.</desc>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#475569"/></marker><style>.b{fill:#f8fafc;stroke:#334155;stroke-width:2}.d{fill:#e0f2fe;stroke:#0284c7;stroke-width:2}.ok{fill:#ecfdf5;stroke:#059669;stroke-width:2}.no{fill:#fef2f2;stroke:#dc2626;stroke-width:2}.t{font:600 18px sans-serif;fill:#0f172a}.s{font:15px sans-serif;fill:#334155}.l{stroke:#475569;stroke-width:3;fill:none;marker-end:url(#a)}</style></defs>
+  <rect width="1000" height="760" fill="#fff"/><text x="40" y="45" class="t" font-size="28">Décision d’une requête proxy</text>
+  <rect x="350" y="75" width="300" height="65" rx="14" class="b"/><text x="500" y="115" text-anchor="middle" class="t">Requête HTTP ou CONNECT</text>
+  <rect x="350" y="185" width="300" height="75" rx="14" class="d"/><text x="500" y="218" text-anchor="middle" class="t">Extraire host + port</text><text x="500" y="244" text-anchor="middle" class="s">Normaliser IDNA, casse et point final</text>
+  <polygon points="500,305 665,375 500,445 335,375" class="d"/><text x="500" y="368" text-anchor="middle" class="t">Règle domaine + port ?</text><text x="500" y="394" text-anchor="middle" class="s">Exacte ou *.sous-domaine</text>
+  <rect x="55" y="335" width="210" height="80" rx="14" class="no"/><text x="160" y="370" text-anchor="middle" class="t">Refuser</text><text x="160" y="397" text-anchor="middle" class="s">HTTP 400 ou 403</text>
+  <polygon points="500,490 625,545 500,600 375,545" class="d"/><text x="500" y="551" text-anchor="middle" class="t">CONNECT ?</text>
+  <rect x="90" y="645" width="300" height="75" rx="14" class="ok"/><text x="240" y="678" text-anchor="middle" class="t">Forward HTTP</text><text x="240" y="704" text-anchor="middle" class="s">Supprimer les hop-by-hop headers</text>
+  <rect x="610" y="645" width="300" height="75" rx="14" class="ok"/><text x="760" y="678" text-anchor="middle" class="t">Tunnel TCP opaque</text><text x="760" y="704" text-anchor="middle" class="s">200 Connection Established</text>
+  <path d="M500 140 V185" class="l"/><path d="M500 260 V305" class="l"/><path d="M335 375 H265" class="l"/><text x="295" y="360" class="s">Non</text><path d="M500 445 V490" class="l"/><text x="515" y="475" class="s">Oui</text><path d="M375 545 C300 545 240 590 240 645" class="l"/><text x="290" y="570" class="s">Non</text><path d="M625 545 C700 545 760 590 760 645" class="l"/><text x="690" y="570" class="s">Oui</text>
+</svg>
